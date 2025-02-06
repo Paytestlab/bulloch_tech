@@ -1,0 +1,214 @@
+openapi: 3.0.3
+info:
+  title: BullochTech API - PaytestAPI
+  contact:
+    name: Support
+    email: support@paytestlab.com
+  version: 1.0.1
+servers:
+  - url: https://127.0.0.1:[port]
+tags:
+  - name: transaction
+    description: Used for controlling transactions
+  - name: status
+    description: Used to get terminal status
+
+paths:
+  /transaction/start:
+    post:
+      tags:
+        - transaction
+      summary: Starts a transaction
+      requestBody:
+        description: Starts a new transaction and optionally provides a callback URL for transaction completion notification
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartTransactionRequest'
+      responses:
+        '200':
+          description: Transaction started successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Failed to start the transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      callbacks:
+        transactionCompleted:
+          '{$request.body#/callbackUrl}':
+            post:
+              summary: Callback for transaction completion notification
+              requestBody:
+                description: Notification payload containing details of the completed transaction
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/TransactionCompletionNotification'
+              responses:
+                '200':
+                  description: Notification received successfully
+
+  /transaction/abort:
+    post:
+      tags:
+        - transaction
+      summary: Aborts a transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbortTransactionRequest'
+      responses:
+        '200':
+          description: Transaction aborted successfully
+        '500':
+          description: Failed to abort the transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /status:
+    get:
+      tags:
+        - status
+      summary: Get terminal status
+      responses:
+        '200':
+          description: Status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '500':
+          description: Failed to get status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    StartTransactionRequest:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Unique identifier for the transaction provided by the client
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        transactionType:
+          type: string
+          enum:
+            - Sale
+            - Purchase
+            - Cashback
+            - Refund
+            - PreAuthorization
+            - OnlineAdvice
+            - PurchaseWithCashback
+          example: Purchase
+        amount:
+          $ref: '#/components/schemas/Amount'
+        amountTip:
+          $ref: '#/components/schemas/Amount'
+        amountOther:
+          $ref: '#/components/schemas/Amount'
+        referenceNumber:
+          type: string
+          example: 123456789
+        callbackUrl:
+          type: string
+          format: uri
+          description: URL to notify when the transaction is complete
+          
+
+    TransactionCompletionNotification:
+      type: object
+      required:
+        - transactionId
+        - status
+      properties:
+        transactionId:
+          type: string
+          description: Unique identifier for the transaction (from the request)
+        status:
+          type: string
+          description: Final status of the transaction
+          enum:
+            - Success
+            - Failed
+        authorizedAmount:
+          $ref: '#/components/schemas/Amount'
+        tenderName:
+          type: string
+        posEntry:
+          type: string
+        PANTruncated:
+          type: string
+        receiptMerchant:
+          type: string
+        receiptCardHolder:
+          type: string
+        receiptCashRegister:
+          type: string
+        referenceNumber:
+          type: string
+
+    Amount:
+      type: object
+      properties:
+        value:
+          type: number
+          multipleOf: 0.01
+          example: 10.22
+        currency:
+          type: string
+          example: EUR
+        
+    
+    AbortTransactionRequest:
+      required:
+        - transactionId
+      properties:
+        transactionId:
+          type: string
+          description:  Unique identifier for the transaction (from the request)
+          example: "123e4567-e89b-12d3-a456-426614174000"
+
+    ErrorResponse:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: error message
+
+    Status:
+      required:
+        - terminalStatus
+      type: object
+      properties:
+        terminalStatus:
+          $ref: '#/components/schemas/TerminalStatus'
+        ECRStatus:
+          $ref: '#/components/schemas/ECRStatus'
+
+    TerminalStatus:
+      type: object
+      properties:
+        displayContent:
+          type: string
+          example: Present Card
+
+    ECRStatus:
+      type: object
+      properties:
+        displayContent:
+          type: string
+          example: Follow instructions on the terminal

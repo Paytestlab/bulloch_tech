@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8" />
+  <title>BullochTech API - PaytestAPI</title>
+  <!-- needed for adaptive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdn.redocly.com/redoc/v2.2.0/bundles/redoc.standalone.js"></script><style data-styled="true" data-styled-version="6.1.15">.cCTQFs{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.cCTQFs{width:100%;padding:40px 40px;}}/*!sc*/
+.Petks{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.Petks{width:100%;padding:0px 40px;}}/*!sc*/
+data-styled.g4[id="sc-fLDLck"]{content:"cCTQFs,Petks,"}/*!sc*/
+.ijZyAc{padding:40px 0;}/*!sc*/
+.ijZyAc:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.ijZyAc>.ijZyAc:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.ijZyAc{padding:0;}}/*!sc*/
+.gWRVHL{padding:40px 0;position:relative;}/*!sc*/
+.gWRVHL:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.gWRVHL>.gWRVHL:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.gWRVHL{padding:0;}}/*!sc*/
+.gWRVHL:not(:last-of-type):after{position:absolute;bottom:0;width:100%;display:block;content:'';border-bottom:1px solid rgba(0, 0, 0, 0.2);}/*!sc*/
+data-styled.g5[id="sc-dycHyt"]{content:"ijZyAc,gWRVHL,"}/*!sc*/
+.lcisZz{width:40%;color:#ffffff;background-color:#263238;padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.lcisZz{width:100%;padding:40px 40px;}}/*!sc*/
+data-styled.g6[id="sc-jbAkgO"]{content:"lcisZz,"}/*!sc*/
+.libpUV{background-color:#263238;}/*!sc*/
+data-styled.g7[id="sc-gNZgCX"]{content:"libpUV,"}/*!sc*/
+.eTCvZl{display:flex;width:100%;padding:0;}/*!sc*/
+@media print,screen and (max-width: 75rem){.eTCvZl{flex-direction:column;}}/*!sc*/
+data-styled.g8[id="sc-kfeOyU"]{content:"eTCvZl,"}/*!sc*/
+.gbxRgf{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#333333;}/*!sc*/
+data-styled.g9[id="sc-hRDKVd"]{content:"gbxRgf,"}/*!sc*/
+.ONRDj{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;margin:0 0 20px;}/*!sc*/
+data-styled.g10[id="sc-jBIHhB"]{content:"ONRDj,"}/*!sc*/
+.joSISv{color:#ffffff;}/*!sc*/
+data-styled.g12[id="sc-jUkaYT"]{content:"joSISv,"}/*!sc*/
+.dunSEZ{border-bottom:1px solid rgba(38, 50, 56, 0.3);margin:1em 0 1em 0;color:rgba(38, 50, 56, 0.5);font-weight:normal;text-transform:uppercase;font-size:0.929em;line-height:20px;}/*!sc*/
+data-styled.g13[id="sc-deSjom"]{content:"dunSEZ,"}/*!sc*/
+.ccWJGj{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.ccWJGj:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+h1:hover>.ccWJGj::before,h2:hover>.ccWJGj::before,.ccWJGj:hover::before{visibility:visible;}/*!sc*/
+data-styled.g14[id="sc-jHswkR"]{content:"ccWJGj,"}/*!sc*/
+.krlsJY{height:18px;width:18px;min-width:18px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.hBbXPQ{height:18px;width:18px;min-width:18px;vertical-align:middle;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.kpohcO{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.kpohcO polygon{fill:#d41f1c;}/*!sc*/
+.zQHHY{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.jsDnaG{height:20px;width:20px;min-width:20px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(0);}/*!sc*/
+.jsDnaG polygon{fill:white;}/*!sc*/
+.gGbHCS{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.gGbHCS polygon{fill:#1d8127;}/*!sc*/
+data-styled.g15[id="sc-cSaEAk"]{content:"krlsJY,hBbXPQ,kpohcO,zQHHY,jsDnaG,gGbHCS,"}/*!sc*/
+.eztgDe{border-left:1px solid #7c7cbb;box-sizing:border-box;position:relative;padding:10px 10px 10px 0;}/*!sc*/
+@media screen and (max-width: 50rem){.eztgDe{display:block;overflow:hidden;}}/*!sc*/
+tr:first-of-type>.eztgDe,tr.last>.eztgDe{border-left-width:0;background-position:top left;background-repeat:no-repeat;background-size:1px 100%;}/*!sc*/
+tr:first-of-type>.eztgDe{background-image:linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 22px,
+      #7c7cbb 22px,
+      #7c7cbb 100%
+    );}/*!sc*/
+tr.last>.eztgDe{background-image:linear-gradient(
+      to bottom,
+      #7c7cbb 0%,
+      #7c7cbb 22px,
+      transparent 22px,
+      transparent 100%
+    );}/*!sc*/
+tr.last+tr>.eztgDe{border-left-color:transparent;}/*!sc*/
+tr.last:first-child>.eztgDe{background:none;border-left-color:transparent;}/*!sc*/
+data-styled.g18[id="sc-kXOizl"]{content:"eztgDe,"}/*!sc*/
+.kNyONh{vertical-align:top;line-height:20px;white-space:nowrap;font-size:13px;font-family:Courier,monospace;}/*!sc*/
+.kNyONh.deprecated{text-decoration:line-through;color:#707070;}/*!sc*/
+data-styled.g20[id="sc-dPKAra"]{content:"kNyONh,"}/*!sc*/
+.eidGeB{border-bottom:1px solid #9fb4be;padding:10px 0;width:75%;box-sizing:border-box;}/*!sc*/
+tr.expanded .eidGeB{border-bottom:none;}/*!sc*/
+@media screen and (max-width: 50rem){.eidGeB{padding:0 20px;border-bottom:none;border-left:1px solid #7c7cbb;}tr.last>.eidGeB{border-left:none;}}/*!sc*/
+data-styled.g21[id="sc-fuExOL"]{content:"eidGeB,"}/*!sc*/
+.iXqMpQ{color:#7c7cbb;font-family:Courier,monospace;margin-right:10px;}/*!sc*/
+.iXqMpQ::before{content:'';display:inline-block;vertical-align:middle;width:10px;height:1px;background:#7c7cbb;}/*!sc*/
+.iXqMpQ::after{content:'';display:inline-block;vertical-align:middle;width:1px;background:#7c7cbb;height:7px;}/*!sc*/
+data-styled.g22[id="sc-gjXmFk"]{content:"iXqMpQ,"}/*!sc*/
+.fEMWVS{border-collapse:separate;border-radius:3px;font-size:14px;border-spacing:0;width:100%;}/*!sc*/
+.fEMWVS >tr{vertical-align:middle;}/*!sc*/
+@media screen and (max-width: 50rem){.fEMWVS{display:block;}.fEMWVS >tr,.fEMWVS >tbody>tr{display:block;}}/*!sc*/
+@media screen and (max-width: 50rem) and (-ms-high-contrast:none){.fEMWVS td{float:left;width:100%;}}/*!sc*/
+.fEMWVS .sc-hORkcV,.fEMWVS .sc-hORkcV .sc-hORkcV .sc-hORkcV,.fEMWVS .sc-hORkcV .sc-hORkcV .sc-hORkcV .sc-hORkcV .sc-hORkcV{margin:1em;margin-right:0;background:#fafafa;}/*!sc*/
+.fEMWVS .sc-hORkcV .sc-hORkcV,.fEMWVS .sc-hORkcV .sc-hORkcV .sc-hORkcV .sc-hORkcV,.fEMWVS .sc-hORkcV .sc-hORkcV .sc-hORkcV .sc-hORkcV .sc-hORkcV .sc-hORkcV{background:#ffffff;}/*!sc*/
+data-styled.g24[id="sc-dVupuq"]{content:"fEMWVS,"}/*!sc*/
+.cnTfwV >ul{list-style:none;padding:0;margin:0;margin:0 -5px;}/*!sc*/
+.cnTfwV >ul >li{padding:5px 10px;display:inline-block;background-color:#11171a;border-bottom:1px solid rgba(0, 0, 0, 0.5);cursor:pointer;text-align:center;outline:none;color:#ccc;margin:0 5px 5px 5px;border:1px solid #07090b;border-radius:5px;min-width:60px;font-size:0.9em;font-weight:bold;}/*!sc*/
+.cnTfwV >ul >li.react-tabs__tab--selected{color:#333333;background:#ffffff;}/*!sc*/
+.cnTfwV >ul >li.react-tabs__tab--selected:focus{outline:auto;}/*!sc*/
+.cnTfwV >ul >li:only-child{flex:none;min-width:100px;}/*!sc*/
+.cnTfwV >ul >li.tab-success{color:#1d8127;}/*!sc*/
+.cnTfwV >ul >li.tab-redirect{color:#ffa500;}/*!sc*/
+.cnTfwV >ul >li.tab-info{color:#87ceeb;}/*!sc*/
+.cnTfwV >ul >li.tab-error{color:#d41f1c;}/*!sc*/
+.cnTfwV >.react-tabs__tab-panel{background:#11171a;}/*!sc*/
+.cnTfwV >.react-tabs__tab-panel>div,.cnTfwV >.react-tabs__tab-panel>pre{padding:20px;margin:0;}/*!sc*/
+.cnTfwV >.react-tabs__tab-panel>div>pre{padding:0;}/*!sc*/
+data-styled.g30[id="sc-bCjwNj"]{content:"cnTfwV,"}/*!sc*/
+.eOvdyU code[class*='language-'],.eOvdyU pre[class*='language-']{text-shadow:0 -0.1em 0.2em black;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;}/*!sc*/
+@media print{.eOvdyU code[class*='language-'],.eOvdyU pre[class*='language-']{text-shadow:none;}}/*!sc*/
+.eOvdyU pre[class*='language-']{padding:1em;margin:0.5em 0;overflow:auto;}/*!sc*/
+.eOvdyU .token.comment,.eOvdyU .token.prolog,.eOvdyU .token.doctype,.eOvdyU .token.cdata{color:hsl(30, 20%, 50%);}/*!sc*/
+.eOvdyU .token.punctuation{opacity:0.7;}/*!sc*/
+.eOvdyU .namespace{opacity:0.7;}/*!sc*/
+.eOvdyU .token.property,.eOvdyU .token.tag,.eOvdyU .token.number,.eOvdyU .token.constant,.eOvdyU .token.symbol{color:#4a8bb3;}/*!sc*/
+.eOvdyU .token.boolean{color:#e64441;}/*!sc*/
+.eOvdyU .token.selector,.eOvdyU .token.attr-name,.eOvdyU .token.string,.eOvdyU .token.char,.eOvdyU .token.builtin,.eOvdyU .token.inserted{color:#a0fbaa;}/*!sc*/
+.eOvdyU .token.selector+a,.eOvdyU .token.attr-name+a,.eOvdyU .token.string+a,.eOvdyU .token.char+a,.eOvdyU .token.builtin+a,.eOvdyU .token.inserted+a,.eOvdyU .token.selector+a:visited,.eOvdyU .token.attr-name+a:visited,.eOvdyU .token.string+a:visited,.eOvdyU .token.char+a:visited,.eOvdyU .token.builtin+a:visited,.eOvdyU .token.inserted+a:visited{color:#4ed2ba;text-decoration:underline;}/*!sc*/
+.eOvdyU .token.property.string{color:white;}/*!sc*/
+.eOvdyU .token.operator,.eOvdyU .token.entity,.eOvdyU .token.url,.eOvdyU .token.variable{color:hsl(40, 90%, 60%);}/*!sc*/
+.eOvdyU .token.atrule,.eOvdyU .token.attr-value,.eOvdyU .token.keyword{color:hsl(350, 40%, 70%);}/*!sc*/
+.eOvdyU .token.regex,.eOvdyU .token.important{color:#e90;}/*!sc*/
+.eOvdyU .token.important,.eOvdyU .token.bold{font-weight:bold;}/*!sc*/
+.eOvdyU .token.italic{font-style:italic;}/*!sc*/
+.eOvdyU .token.entity{cursor:help;}/*!sc*/
+.eOvdyU .token.deleted{color:red;}/*!sc*/
+data-styled.g32[id="sc-dJkDXt"]{content:"eOvdyU,"}/*!sc*/
+.hzLBDF{opacity:0.7;transition:opacity 0.3s ease;text-align:right;}/*!sc*/
+.hzLBDF:focus-within{opacity:1;}/*!sc*/
+.hzLBDF >button{background-color:transparent;border:0;color:inherit;padding:2px 10px;font-family:Roboto,sans-serif;font-size:14px;line-height:1.5em;cursor:pointer;outline:0;}/*!sc*/
+.hzLBDF >button :hover,.hzLBDF >button :focus{background:rgba(255, 255, 255, 0.1);}/*!sc*/
+data-styled.g33[id="sc-lertIE"]{content:"hzLBDF,"}/*!sc*/
+.jMdEeM{position:relative;}/*!sc*/
+data-styled.g37[id="sc-dOUtaJ"]{content:"jMdEeM,"}/*!sc*/
+.lcGauM{margin-left:10px;text-transform:none;font-size:0.929em;color:black;}/*!sc*/
+data-styled.g41[id="sc-dslWvo"]{content:"lcGauM,"}/*!sc*/
+.iFgJCs{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.iFgJCs p:last-child{margin-bottom:0;}/*!sc*/
+.iFgJCs h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.iFgJCs h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.iFgJCs code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.iFgJCs pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.iFgJCs pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.iFgJCs pre code:before,.iFgJCs pre code:after{content:none;}/*!sc*/
+.iFgJCs blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.iFgJCs img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.iFgJCs ul,.iFgJCs ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.iFgJCs ul ul,.iFgJCs ol ul,.iFgJCs ul ol,.iFgJCs ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.iFgJCs table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.iFgJCs table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.iFgJCs table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.iFgJCs table th,.iFgJCs table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.iFgJCs table th{text-align:left;font-weight:bold;}/*!sc*/
+.iFgJCs .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.iFgJCs .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.iFgJCs h1:hover>.share-link::before,.iFgJCs h2:hover>.share-link::before,.iFgJCs .share-link:hover::before{visibility:visible;}/*!sc*/
+.iFgJCs a{text-decoration:auto;color:#32329f;}/*!sc*/
+.iFgJCs a:visited{color:#32329f;}/*!sc*/
+.iFgJCs a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+.fHLtmm{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.fHLtmm p:last-child{margin-bottom:0;}/*!sc*/
+.fHLtmm p:first-child{margin-top:0;}/*!sc*/
+.fHLtmm p:last-child{margin-bottom:0;}/*!sc*/
+.fHLtmm h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.fHLtmm h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.fHLtmm code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.fHLtmm pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.fHLtmm pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.fHLtmm pre code:before,.fHLtmm pre code:after{content:none;}/*!sc*/
+.fHLtmm blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.fHLtmm img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.fHLtmm ul,.fHLtmm ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.fHLtmm ul ul,.fHLtmm ol ul,.fHLtmm ul ol,.fHLtmm ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.fHLtmm table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.fHLtmm table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.fHLtmm table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.fHLtmm table th,.fHLtmm table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.fHLtmm table th{text-align:left;font-weight:bold;}/*!sc*/
+.fHLtmm .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.fHLtmm .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.fHLtmm h1:hover>.share-link::before,.fHLtmm h2:hover>.share-link::before,.fHLtmm .share-link:hover::before{visibility:visible;}/*!sc*/
+.fHLtmm a{text-decoration:auto;color:#32329f;}/*!sc*/
+.fHLtmm a:visited{color:#32329f;}/*!sc*/
+.fHLtmm a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+data-styled.g42[id="sc-eXfTSZ"]{content:"iFgJCs,fHLtmm,"}/*!sc*/
+.iWCNbi{display:inline;}/*!sc*/
+data-styled.g43[id="sc-dXYVqG"]{content:"iWCNbi,"}/*!sc*/
+.kPewJt{position:relative;}/*!sc*/
+data-styled.g44[id="sc-fCSSOr"]{content:"kPewJt,"}/*!sc*/
+.jmgBLa:hover>.sc-lertIE{opacity:1;}/*!sc*/
+data-styled.g49[id="sc-eOrxMY"]{content:"jmgBLa,"}/*!sc*/
+.fAqzdc{font-family:Courier,monospace;font-size:13px;white-space:pre;contain:content;overflow-x:auto;}/*!sc*/
+.fAqzdc .redoc-json code>.collapser{display:none;pointer-events:none;}/*!sc*/
+.fAqzdc .callback-function{color:gray;}/*!sc*/
+.fAqzdc .collapser:after{content:'-';cursor:pointer;}/*!sc*/
+.fAqzdc .collapsed>.collapser:after{content:'+';cursor:pointer;}/*!sc*/
+.fAqzdc .ellipsis:after{content:' … ';}/*!sc*/
+.fAqzdc .collapsible{margin-left:2em;}/*!sc*/
+.fAqzdc .hoverable{padding-top:1px;padding-bottom:1px;padding-left:2px;padding-right:2px;border-radius:2px;}/*!sc*/
+.fAqzdc .hovered{background-color:rgba(235, 238, 249, 1);}/*!sc*/
+.fAqzdc .collapser{background-color:transparent;border:0;color:#fff;font-family:Courier,monospace;font-size:13px;padding-right:6px;padding-left:6px;padding-top:0;padding-bottom:0;display:flex;align-items:center;justify-content:center;width:15px;height:15px;position:absolute;top:4px;left:-1.5em;cursor:default;user-select:none;-webkit-user-select:none;padding:2px;}/*!sc*/
+.fAqzdc .collapser:focus{outline-color:#fff;outline-style:dotted;outline-width:1px;}/*!sc*/
+.fAqzdc ul{list-style-type:none;padding:0px;margin:0px 0px 0px 26px;}/*!sc*/
+.fAqzdc li{position:relative;display:block;}/*!sc*/
+.fAqzdc .hoverable{display:inline-block;}/*!sc*/
+.fAqzdc .selected{outline-style:solid;outline-width:1px;outline-style:dotted;}/*!sc*/
+.fAqzdc .collapsed>.collapsible{display:none;}/*!sc*/
+.fAqzdc .ellipsis{display:none;}/*!sc*/
+.fAqzdc .collapsed>.ellipsis{display:inherit;}/*!sc*/
+data-styled.g50[id="sc-gtlvkJ"]{content:"fAqzdc,"}/*!sc*/
+.hmEMDU{padding:0.9em;background-color:rgba(38,50,56,0.4);margin:0 0 10px 0;display:block;font-family:Montserrat,sans-serif;font-size:0.929em;line-height:1.5em;}/*!sc*/
+data-styled.g51[id="sc-beKSRx"]{content:"hmEMDU,"}/*!sc*/
+.dpRqHD{font-family:Montserrat,sans-serif;font-size:12px;position:absolute;z-index:1;top:-11px;left:12px;font-weight:600;color:rgba(255,255,255,0.7);}/*!sc*/
+data-styled.g52[id="sc-fEOKFM"]{content:"dpRqHD,"}/*!sc*/
+.OIIYS{position:relative;}/*!sc*/
+data-styled.g53[id="sc-bxmmIP"]{content:"OIIYS,"}/*!sc*/
+.exYKuj{margin-top:15px;}/*!sc*/
+data-styled.g56[id="sc-loYsQo"]{content:"exYKuj,"}/*!sc*/
+.dSXgsG.deprecated span.property-name{text-decoration:line-through;color:#707070;}/*!sc*/
+.dSXgsG button{background-color:transparent;border:0;outline:0;font-size:13px;font-family:Courier,monospace;cursor:pointer;padding:0;color:#333333;}/*!sc*/
+.dSXgsG button:focus{font-weight:600;}/*!sc*/
+.dSXgsG .sc-cSaEAk{height:1.1em;width:1.1em;}/*!sc*/
+.dSXgsG .sc-cSaEAk polygon{fill:#666;}/*!sc*/
+data-styled.g57[id="sc-hhvUTr"]{content:"dSXgsG,"}/*!sc*/
+.jBpAbV{vertical-align:middle;font-size:13px;line-height:20px;}/*!sc*/
+data-styled.g58[id="sc-sediK"]{content:"jBpAbV,"}/*!sc*/
+.hELCbj{color:rgba(102,102,102,0.9);}/*!sc*/
+data-styled.g59[id="sc-cAQujh"]{content:"hELCbj,"}/*!sc*/
+.bCDwpq{color:#666;}/*!sc*/
+data-styled.g60[id="sc-haUlXw"]{content:"bCDwpq,"}/*!sc*/
+.eUvFgO{color:#666;word-break:break-word;}/*!sc*/
+data-styled.g61[id="sc-gIivzS"]{content:"eUvFgO,"}/*!sc*/
+.kpBMZY{color:#d41f1c;font-size:0.9em;font-weight:normal;margin-left:20px;line-height:1;}/*!sc*/
+data-styled.g62[id="sc-incsXD"]{content:"kpBMZY,"}/*!sc*/
+.cPTpOn{border-radius:2px;word-break:break-word;background-color:rgba(51,51,51,0.05);color:rgba(51,51,51,0.9);padding:0 5px;border:1px solid rgba(51,51,51,0.1);font-family:Courier,monospace;}/*!sc*/
++{margin-left:0;}/*!sc*/
+data-styled.g66[id="sc-cHQrJj"]{content:"cPTpOn,"}/*!sc*/
+.liwvKV{margin-top:0;margin-bottom:0.5em;}/*!sc*/
+data-styled.g91[id="sc-fylWoh"]{content:"liwvKV,"}/*!sc*/
+.jPYmgr{border:1px solid #32329f;color:#32329f;font-weight:normal;margin-left:0.5em;padding:4px 8px 4px;display:inline-block;text-decoration:none;cursor:pointer;}/*!sc*/
+data-styled.g92[id="sc-jYpOcw"]{content:"jPYmgr,"}/*!sc*/
+.kUxLkb::before{content:'|';display:inline-block;opacity:0.5;width:15px;text-align:center;}/*!sc*/
+.kUxLkb:last-child::after{display:none;}/*!sc*/
+data-styled.g93[id="sc-fQNqfz"]{content:"kUxLkb,"}/*!sc*/
+.fsIaVR{overflow:hidden;}/*!sc*/
+data-styled.g94[id="sc-kqRhTO"]{content:"fsIaVR,"}/*!sc*/
+.eiaHdo{display:flex;flex-wrap:wrap;margin-left:-15px;}/*!sc*/
+data-styled.g95[id="sc-fDVLrx"]{content:"eiaHdo,"}/*!sc*/
+.cIeDhL{width:9ex;display:inline-block;height:13px;line-height:13px;background-color:#333;border-radius:3px;background-repeat:no-repeat;background-position:6px 4px;font-size:7px;font-family:Verdana,sans-serif;color:white;text-transform:uppercase;text-align:center;font-weight:bold;vertical-align:middle;margin-right:6px;margin-top:2px;}/*!sc*/
+.cIeDhL.get{background-color:#2F8132;}/*!sc*/
+.cIeDhL.post{background-color:#186FAF;}/*!sc*/
+.cIeDhL.put{background-color:#95507c;}/*!sc*/
+.cIeDhL.options{background-color:#947014;}/*!sc*/
+.cIeDhL.patch{background-color:#bf581d;}/*!sc*/
+.cIeDhL.delete{background-color:#cc3333;}/*!sc*/
+.cIeDhL.basic{background-color:#707070;}/*!sc*/
+.cIeDhL.link{background-color:#07818F;}/*!sc*/
+.cIeDhL.head{background-color:#A23DAD;}/*!sc*/
+.cIeDhL.hook{background-color:#32329f;}/*!sc*/
+.cIeDhL.schema{background-color:#707070;}/*!sc*/
+data-styled.g99[id="sc-dLPjTJ"]{content:"cIeDhL,"}/*!sc*/
+.iaOfDE{margin:0;padding:0;}/*!sc*/
+.iaOfDE:first-child{padding-bottom:32px;}/*!sc*/
+.sc-ilTbHY .sc-ilTbHY{font-size:0.929em;}/*!sc*/
+.eaLISt{margin:0;padding:0;display:none;}/*!sc*/
+.eaLISt:first-child{padding-bottom:32px;}/*!sc*/
+.sc-ilTbHY .sc-ilTbHY{font-size:0.929em;}/*!sc*/
+data-styled.g100[id="sc-ilTbHY"]{content:"iaOfDE,eaLISt,"}/*!sc*/
+.bIhXTU{list-style:none inside none;overflow:hidden;text-overflow:ellipsis;padding:0;}/*!sc*/
+data-styled.g101[id="sc-kDeqfd"]{content:"bIhXTU,"}/*!sc*/
+.dheKiT{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;font-size:0.929em;text-transform:none;background-color:#fafafa;}/*!sc*/
+.dheKiT:hover{color:#32329f;background-color:#e1e1e1;}/*!sc*/
+.dheKiT .sc-cSaEAk{height:1.5em;width:1.5em;}/*!sc*/
+.dheKiT .sc-cSaEAk polygon{fill:#333333;}/*!sc*/
+.hVYxuB{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;background-color:#fafafa;}/*!sc*/
+.hVYxuB:hover{color:#32329f;background-color:#ededed;}/*!sc*/
+.hVYxuB .sc-cSaEAk{height:1.5em;width:1.5em;}/*!sc*/
+.hVYxuB .sc-cSaEAk polygon{fill:#333333;}/*!sc*/
+data-styled.g102[id="sc-UBoew"]{content:"dheKiT,hVYxuB,"}/*!sc*/
+.dChECw{display:inline-block;vertical-align:middle;width:calc(100% - 38px);overflow:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g103[id="sc-edctFj"]{content:"dChECw,"}/*!sc*/
+.idJbh{font-size:0.8em;margin-top:10px;text-align:center;position:fixed;width:260px;bottom:0;background:#fafafa;}/*!sc*/
+.idJbh a,.idJbh a:visited,.idJbh a:hover{color:#333333!important;padding:5px 0;border-top:1px solid #e1e1e1;text-decoration:none;display:flex;align-items:center;justify-content:center;}/*!sc*/
+.idJbh img{width:15px;margin-right:5px;}/*!sc*/
+@media screen and (max-width: 50rem){.idJbh{width:100%;}}/*!sc*/
+data-styled.g104[id="sc-fJVbdy"]{content:"idJbh,"}/*!sc*/
+.cfiHoz{border:0;width:100%;text-align:left;}/*!sc*/
+.cfiHoz>*{vertical-align:middle;}/*!sc*/
+.cfiHoz .sc-cSaEAk polygon{fill:#c2c2c2;}/*!sc*/
+data-styled.g105[id="sc-kwHJyZ"]{content:"cfiHoz,"}/*!sc*/
+.ibdxmt{text-decoration:none;margin-right:8px;}/*!sc*/
+data-styled.g106[id="sc-OeHys"]{content:"ibdxmt,"}/*!sc*/
+.gIccqT{margin:0 5px 0 0;}/*!sc*/
+data-styled.g107[id="sc-dWFMZf"]{content:"gIccqT,"}/*!sc*/
+.FHdsl{padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;background-color:#F5F5F5;cursor:pointer;outline-color:#c2c2c2;}/*!sc*/
+data-styled.g108[id="sc-fDyuxu"]{content:"FHdsl,"}/*!sc*/
+.iQlcjo{cursor:pointer;position:relative;margin-bottom:5px;}/*!sc*/
+data-styled.g110[id="sc-cOTGOU"]{content:"iQlcjo,"}/*!sc*/
+.hGqECm{font-family:Courier,monospace;margin-left:10px;flex:1;overflow-x:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g111[id="sc-dNMyuw"]{content:"hGqECm,"}/*!sc*/
+.heSNra{outline:0;color:inherit;width:100%;text-align:left;cursor:pointer;padding:10px 30px 10px 20px;border-radius:4px 4px 0 0;background-color:#11171a;display:flex;white-space:nowrap;align-items:center;border:1px solid transparent;border-bottom:0;transition:border-color 0.25s ease;}/*!sc*/
+.heSNra ..sc-dNMyuw{color:#ffffff;}/*!sc*/
+.heSNra:focus{box-shadow:inset 0 2px 2px rgba(0, 0, 0, 0.45),0 2px 0 rgba(128, 128, 128, 0.25);}/*!sc*/
+data-styled.g112[id="sc-ijEwUV"]{content:"heSNra,"}/*!sc*/
+.ddMszN{font-size:0.929em;line-height:20px;background-color:#186FAF;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+.cVuTcb{font-size:0.929em;line-height:20px;background-color:#2F8132;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+data-styled.g113[id="sc-iNzRy"]{content:"ddMszN,cVuTcb,"}/*!sc*/
+.dfQykF{position:absolute;width:100%;z-index:100;background:#fafafa;color:#263238;box-sizing:border-box;box-shadow:0 0 6px rgba(0, 0, 0, 0.33);overflow:hidden;border-bottom-left-radius:4px;border-bottom-right-radius:4px;transition:all 0.25s ease;visibility:hidden;transform:translateY(-50%) scaleY(0);}/*!sc*/
+data-styled.g114[id="sc-eEFyrX"]{content:"dfQykF,"}/*!sc*/
+.cIiuCa{padding:10px;}/*!sc*/
+data-styled.g115[id="sc-dHpROs"]{content:"cIiuCa,"}/*!sc*/
+.bWJrMC{padding:5px;border:1px solid #ccc;background:#fff;word-break:break-all;color:#32329f;}/*!sc*/
+.bWJrMC >span{color:#333333;}/*!sc*/
+data-styled.g116[id="sc-idhQoR"]{content:"bWJrMC,"}/*!sc*/
+.jUPwXu{text-transform:lowercase;margin-left:0;line-height:1.5em;}/*!sc*/
+data-styled.g117[id="sc-cqTlu"]{content:"jUPwXu,"}/*!sc*/
+.giHjSG{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#1d8127;background-color:rgba(29,129,39,0.07);cursor:default;}/*!sc*/
+.giHjSG:focus{outline:auto #1d8127;}/*!sc*/
+.giHjSG::before{content:"—";font-weight:bold;width:1.5em;text-align:center;display:inline-block;vertical-align:top;}/*!sc*/
+.giHjSG:focus{outline:0;}/*!sc*/
+.ivbvCI{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#d41f1c;background-color:rgba(212,31,28,0.07);cursor:default;}/*!sc*/
+.ivbvCI:focus{outline:auto #d41f1c;}/*!sc*/
+.ivbvCI::before{content:"—";font-weight:bold;width:1.5em;text-align:center;display:inline-block;vertical-align:top;}/*!sc*/
+.ivbvCI:focus{outline:0;}/*!sc*/
+.jUGGWm{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#d41f1c;background-color:rgba(212,31,28,0.07);}/*!sc*/
+.jUGGWm:focus{outline:auto #d41f1c;}/*!sc*/
+.YShps{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#1d8127;background-color:rgba(29,129,39,0.07);}/*!sc*/
+.YShps:focus{outline:auto #1d8127;}/*!sc*/
+data-styled.g119[id="sc-fIeReU"]{content:"giHjSG,ivbvCI,jUGGWm,YShps,"}/*!sc*/
+.dqKUKh{vertical-align:top;}/*!sc*/
+data-styled.g122[id="sc-bAomZO"]{content:"dqKUKh,"}/*!sc*/
+.kogFEO{font-size:1.3em;padding:0.2em 0;margin:3em 0 1.1em;color:#333333;font-weight:normal;}/*!sc*/
+data-styled.g123[id="sc-dxpuJR"]{content:"kogFEO,"}/*!sc*/
+.dXmrt{font-size:1.3em;padding:0.2em 0;margin:3em 0 1.1em;color:#333333;font-weight:normal;}/*!sc*/
+data-styled.g125[id="sc-kPjdqr"]{content:"dXmrt,"}/*!sc*/
+.bfsIys{margin-top:15px;}/*!sc*/
+data-styled.g126[id="sc-btRGtK"]{content:"bfsIys,"}/*!sc*/
+.ceshRe{background:#11171a;padding:20px;}/*!sc*/
+data-styled.g127[id="sc-dqSOdN"]{content:"ceshRe,"}/*!sc*/
+.wZZvM{user-select:none;width:20px;height:20px;align-self:center;display:flex;flex-direction:column;color:#32329f;}/*!sc*/
+data-styled.g129[id="sc-bACthX"]{content:"wZZvM,"}/*!sc*/
+.cenDOT{width:260px;background-color:#fafafa;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;height:100vh;position:sticky;position:-webkit-sticky;top:0;}/*!sc*/
+@media screen and (max-width: 50rem){.cenDOT{position:fixed;z-index:20;width:100%;background:#fafafa;display:none;}}/*!sc*/
+@media print{.cenDOT{display:none;}}/*!sc*/
+data-styled.g130[id="sc-duGFKm"]{content:"cenDOT,"}/*!sc*/
+.gWNnXF{outline:none;user-select:none;background-color:#f2f2f2;color:#32329f;display:none;cursor:pointer;position:fixed;right:20px;z-index:100;border-radius:50%;box-shadow:0 0 20px rgba(0, 0, 0, 0.3);bottom:44px;width:60px;height:60px;padding:0 20px;}/*!sc*/
+@media screen and (max-width: 50rem){.gWNnXF{display:flex;}}/*!sc*/
+.gWNnXF svg{color:#0065FB;}/*!sc*/
+@media print{.gWNnXF{display:none;}}/*!sc*/
+data-styled.g131[id="sc-egnSlO"]{content:"gWNnXF,"}/*!sc*/
+.gvDvZC{font-family:Roboto,sans-serif;font-size:14px;font-weight:400;line-height:1.5em;color:#333333;display:flex;position:relative;text-align:left;-webkit-font-smoothing:antialiased;font-smoothing:antialiased;text-rendering:optimizeSpeed!important;tap-highlight-color:rgba(0, 0, 0, 0);text-size-adjust:100%;}/*!sc*/
+.gvDvZC *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255, 255, 255, 0);}/*!sc*/
+data-styled.g132[id="sc-iCfQMn"]{content:"gvDvZC,"}/*!sc*/
+.dOnCHM{z-index:1;position:relative;overflow:hidden;width:calc(100% - 260px);contain:layout;}/*!sc*/
+@media print,screen and (max-width: 50rem){.dOnCHM{width:100%;}}/*!sc*/
+data-styled.g133[id="sc-kSwkvc"]{content:"dOnCHM,"}/*!sc*/
+.ewMbgE{background:#263238;position:absolute;top:0;bottom:0;right:0;width:calc((100% - 260px) * 0.4);}/*!sc*/
+@media print,screen and (max-width: 75rem){.ewMbgE{display:none;}}/*!sc*/
+data-styled.g134[id="sc-dYSzwF"]{content:"ewMbgE,"}/*!sc*/
+.jeCODh{padding:5px 0;}/*!sc*/
+data-styled.g135[id="sc-dZRlFK"]{content:"jeCODh,"}/*!sc*/
+.bQkSeT{width:calc(100% - 40px);box-sizing:border-box;margin:0 20px;padding:5px 10px 5px 20px;border:0;border-bottom:1px solid #e1e1e1;font-family:Roboto,sans-serif;font-weight:bold;font-size:13px;color:#333333;background-color:transparent;outline:none;}/*!sc*/
+data-styled.g136[id="sc-ivJkgj"]{content:"bQkSeT,"}/*!sc*/
+.dfurWS{position:absolute;left:20px;height:1.8em;width:0.9em;}/*!sc*/
+.dfurWS path{fill:#333333;}/*!sc*/
+data-styled.g137[id="sc-kLZDOY"]{content:"dfurWS,"}/*!sc*/
+</style>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+</head>
+
+<body>
+  
+      <div id="redoc"><div class="sc-iCfQMn gvDvZC redoc-wrap"><div class="sc-duGFKm cenDOT menu-content" style="top:0px;height:calc(100vh - 0px)"><div role="search" class="sc-dZRlFK jeCODh"><svg class="sc-kLZDOY dfurWS search-icon" version="1.1" viewBox="0 0 1000 1000" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><path d="M968.2,849.4L667.3,549c83.9-136.5,66.7-317.4-51.7-435.6C477.1-25,252.5-25,113.9,113.4c-138.5,138.3-138.5,362.6,0,501C219.2,730.1,413.2,743,547.6,666.5l301.9,301.4c43.6,43.6,76.9,14.9,104.2-12.4C981,928.3,1011.8,893,968.2,849.4z M524.5,522c-88.9,88.7-233,88.7-321.8,0c-88.9-88.7-88.9-232.6,0-321.3c88.9-88.7,233-88.7,321.8,0C613.4,289.4,613.4,433.3,524.5,522z"></path></svg><input placeholder="Search..." aria-label="Search" type="text" class="sc-ivJkgj bQkSeT search-input" value=""/></div><div class="sc-dOUtaJ jMdEeM scrollbar-container undefined"><ul role="menu" class="sc-ilTbHY iaOfDE"><li tabindex="0" depth="1" data-item-id="tag/transaction" role="menuitem" class="sc-kDeqfd bIhXTU"><label class="sc-UBoew dheKiT -depth1"><span width="calc(100% - 38px)" title="transaction" class="sc-edctFj dChECw">transaction</span><svg class="sc-cSaEAk krlsJY" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilTbHY eaLISt"><li tabindex="0" depth="2" data-item-id="tag/transaction/paths/~1transaction~1start/post" role="menuitem" class="sc-kDeqfd bIhXTU"><label class="sc-UBoew hVYxuB -depth2"><span type="post" class="sc-dLPjTJ cIeDhL operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-edctFj dChECw">Starts a transaction</span></label></li><li tabindex="0" depth="2" data-item-id="tag/transaction/paths/~1transaction~1abort/post" role="menuitem" class="sc-kDeqfd bIhXTU"><label class="sc-UBoew hVYxuB -depth2"><span type="post" class="sc-dLPjTJ cIeDhL operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-edctFj dChECw">Aborts a transaction</span></label></li></ul></li><li tabindex="0" depth="1" data-item-id="tag/status" role="menuitem" class="sc-kDeqfd bIhXTU"><label class="sc-UBoew dheKiT -depth1"><span width="calc(100% - 38px)" title="status" class="sc-edctFj dChECw">status</span><svg class="sc-cSaEAk krlsJY" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilTbHY eaLISt"><li tabindex="0" depth="2" data-item-id="tag/status/paths/~1status/get" role="menuitem" class="sc-kDeqfd bIhXTU"><label class="sc-UBoew hVYxuB -depth2"><span type="get" class="sc-dLPjTJ cIeDhL operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-edctFj dChECw">Get terminal status</span></label></li></ul></li></ul><div class="sc-fJVbdy idJbh"><a target="_blank" rel="noopener noreferrer" href="https://redocly.com/redoc/">API docs by Redocly</a></div></div></div><div class="sc-egnSlO gWNnXF"><div class="sc-bACthX wZZvM"><svg class="" style="transform:translate(2px, -4px) rotate(180deg);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg><svg class="" style="transform:translate(2px, 4px);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg></div></div><div class="sc-kSwkvc dOnCHM api-content"><div class="sc-dycHyt ijZyAc"><div class="sc-kfeOyU eTCvZl"><div class="sc-fLDLck cCTQFs api-info"><h1 class="sc-hRDKVd sc-fylWoh gbxRgf liwvKV">BullochTech API - PaytestAPI<!-- --> <span>(<!-- -->1.0.1<!-- -->)</span></h1><p>Download OpenAPI specification<!-- -->:<a download="openapi.json" target="_blank" class="sc-jYpOcw jPYmgr">Download</a></p><div class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs"><div class="sc-kqRhTO fsIaVR"><div class="sc-fDVLrx eiaHdo"><span class="sc-fQNqfz kUxLkb">Support<!-- -->:<!-- --> <a href="mailto:support@paytestlab.com">support@paytestlab.com</a></span> <!-- --> <!-- --> </div></div></div><div data-role="redoc-summary" html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs"></div><div data-role="redoc-description" html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs"></div></div></div></div><div id="tag/transaction" data-section-id="tag/transaction" class="sc-dycHyt ijZyAc"><div class="sc-kfeOyU eTCvZl"><div class="sc-fLDLck cCTQFs"><h2 class="sc-jBIHhB ONRDj"><a class="sc-jHswkR ccWJGj" href="#tag/transaction" aria-label="tag/transaction"></a>transaction</h2></div></div><div class="sc-fLDLck Petks"><div class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs redoc-markdown " html="&lt;p&gt;Used for controlling transactions&lt;/p&gt;
+"><p>Used for controlling transactions</p>
+</div></div></div><div id="tag/transaction/paths/~1transaction~1start/post" data-section-id="tag/transaction/paths/~1transaction~1start/post" class="sc-dycHyt gWRVHL"><div class="sc-kfeOyU eTCvZl"><div class="sc-fLDLck cCTQFs"><h2 class="sc-jBIHhB ONRDj"><a class="sc-jHswkR ccWJGj" href="#tag/transaction/paths/~1transaction~1start/post" aria-label="tag/transaction/paths/~1transaction~1start/post"></a>Starts a transaction<!-- --> </h2><h5 class="sc-deSjom dunSEZ">Request Body schema: <span class="sc-dslWvo lcGauM">application/json</span><div class="sc-sediK sc-incsXD sc-cqTlu jBpAbV kpBMZY jUPwXu">required</div></h5><div html="&lt;p&gt;Starts a new transaction and optionally provides a callback URL for transaction completion notification&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs"><p>Starts a new transaction and optionally provides a callback URL for transaction completion notification</p>
+</div><table class="sc-dVupuq fEMWVS"><tbody><tr class=""><td kind="field" title="transactionId" class="sc-kXOizl sc-dPKAra eztgDe kNyONh"><span class="sc-gjXmFk iXqMpQ"></span><span class="property-name">transactionId</span></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">string</span></div> <div><div html="&lt;p&gt;Unique identifier for the transaction provided by the client&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"><p>Unique identifier for the transaction provided by the client</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="transactionType" class="sc-kXOizl sc-dPKAra eztgDe kNyONh"><span class="sc-gjXmFk iXqMpQ"></span><span class="property-name">transactionType</span></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">string</span></div><div><span class="sc-sediK jBpAbV"> <!-- -->Enum<!-- -->:</span> <span class="sc-sediK sc-cHQrJj jBpAbV cPTpOn">&quot;Sale&quot;</span> <span class="sc-sediK sc-cHQrJj jBpAbV cPTpOn">&quot;Purchase&quot;</span> <span class="sc-sediK sc-cHQrJj jBpAbV cPTpOn">&quot;Cashback&quot;</span> <span class="sc-sediK sc-cHQrJj jBpAbV cPTpOn">&quot;Refund&quot;</span> <span class="sc-sediK sc-cHQrJj jBpAbV cPTpOn">&quot;PreAuthorization&quot;</span> <span class="sc-sediK sc-cHQrJj jBpAbV cPTpOn">&quot;OnlineAdvice&quot;</span> <span class="sc-sediK sc-cHQrJj jBpAbV cPTpOn">&quot;PurchaseWithCashback&quot;</span> </div> <div><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div></div></div></td></tr><tr class=""><td kind="field" title="amount" class="sc-kXOizl sc-dPKAra sc-hhvUTr eztgDe kNyONh dSXgsG"><span class="sc-gjXmFk iXqMpQ"></span><button aria-label="expand amount"><span class="property-name">amount</span><svg class="sc-cSaEAk hBbXPQ" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">object</span><span class="sc-sediK sc-gIivzS jBpAbV eUvFgO"> (<!-- -->Amount<!-- -->) </span></div> <div><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div></div></div></td></tr><tr class=""><td kind="field" title="amountTip" class="sc-kXOizl sc-dPKAra sc-hhvUTr eztgDe kNyONh dSXgsG"><span class="sc-gjXmFk iXqMpQ"></span><button aria-label="expand amountTip"><span class="property-name">amountTip</span><svg class="sc-cSaEAk hBbXPQ" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">object</span><span class="sc-sediK sc-gIivzS jBpAbV eUvFgO"> (<!-- -->Amount<!-- -->) </span></div> <div><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div></div></div></td></tr><tr class=""><td kind="field" title="amountOther" class="sc-kXOizl sc-dPKAra sc-hhvUTr eztgDe kNyONh dSXgsG"><span class="sc-gjXmFk iXqMpQ"></span><button aria-label="expand amountOther"><span class="property-name">amountOther</span><svg class="sc-cSaEAk hBbXPQ" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">object</span><span class="sc-sediK sc-gIivzS jBpAbV eUvFgO"> (<!-- -->Amount<!-- -->) </span></div> <div><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div></div></div></td></tr><tr class=""><td kind="field" title="referenceNumber" class="sc-kXOizl sc-dPKAra eztgDe kNyONh"><span class="sc-gjXmFk iXqMpQ"></span><span class="property-name">referenceNumber</span></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">string</span></div> <div><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div></div></div></td></tr><tr class="last "><td kind="field" title="callbackUrl" class="sc-kXOizl sc-dPKAra eztgDe kNyONh"><span class="sc-gjXmFk iXqMpQ"></span><span class="property-name">callbackUrl</span></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">string</span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq"> <!-- -->&lt;<!-- -->uri<!-- -->&gt;<!-- --> </span></div> <div><div html="&lt;p&gt;URL to notify when the transaction is complete&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"><p>URL to notify when the transaction is complete</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-dxpuJR kogFEO">Responses</h3><div><button class="sc-fIeReU giHjSG" disabled=""><strong class="sc-bAomZO dqKUKh">200<!-- --> </strong><div html="&lt;p&gt;Transaction started successfully&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs sc-dXYVqG iWCNbi"><p>Transaction started successfully</p>
+</div></button></div><div><button class="sc-fIeReU ivbvCI" disabled=""><strong class="sc-bAomZO dqKUKh">400<!-- --> </strong><div html="&lt;p&gt;Invalid input&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs sc-dXYVqG iWCNbi"><p>Invalid input</p>
+</div></button></div><div><button class="sc-fIeReU jUGGWm"><svg class="sc-cSaEAk kpohcO" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-bAomZO dqKUKh">500<!-- --> </strong><div html="&lt;p&gt;Failed to start the transaction&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs sc-dXYVqG iWCNbi"><p>Failed to start the transaction</p>
+</div></button></div></div><div><h3 class="sc-kPjdqr dXmrt"> Callbacks </h3><button class="sc-kwHJyZ cfiHoz sc-fDyuxu FHdsl"><span type="post" class="sc-dLPjTJ sc-dWFMZf cIeDhL gIccqT operation-type post">post</span><svg class="sc-cSaEAk zQHHY" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><span class="sc-OeHys ibdxmt">Callback for transaction completion notification</span></button></div></div><div class="sc-jbAkgO sc-gNZgCX lcisZz libpUV"><div class="sc-cOTGOU iQlcjo"><button class="sc-ijEwUV heSNra"><span type="post" class="sc-iNzRy ddMszN http-verb post">post</span><span class="sc-dNMyuw hGqECm">/transaction/start</span><svg class="sc-cSaEAk jsDnaG" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-eEFyrX dfQykF"><div class="sc-dHpROs cIiuCa"><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div><div tabindex="0" role="button"><div class="sc-idhQoR bWJrMC"><span>https://127.0.0.1:[port]</span>/transaction/start</div></div></div></div></div><div><h3 class="sc-jUkaYT joSISv"> <!-- -->Request samples<!-- --> </h3><div class="sc-bCjwNj cnTfwV" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab:R99cq:0" aria-selected="true" aria-disabled="false" aria-controls="panel:R99cq:0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel:R99cq:0" aria-labelledby="tab:R99cq:0"><div><div class="sc-bxmmIP OIIYS"><span class="sc-fEOKFM dpRqHD">Content type</span><div class="sc-beKSRx hmEMDU">application/json</div></div><div class="sc-loYsQo exYKuj"><div class="sc-eOrxMY jmgBLa"><div class="sc-lertIE hzLBDF"><button><div class="sc-fCSSOr kPewJt">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div class="sc-dJkDXt eOvdyU sc-gtlvkJ fAqzdc"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"transactionId"</span>: <span class="token string">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"transactionType"</span>: <span class="token string">&quot;Purchase&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"amount"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"value"</span>: <span class="token number">10.22</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"currency"</span>: <span class="token string">&quot;EUR&quot;</span></div></li></ul><span class="token punctuation">}</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"amountTip"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"value"</span>: <span class="token number">10.22</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"currency"</span>: <span class="token string">&quot;EUR&quot;</span></div></li></ul><span class="token punctuation">}</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"amountOther"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"value"</span>: <span class="token number">10.22</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"currency"</span>: <span class="token string">&quot;EUR&quot;</span></div></li></ul><span class="token punctuation">}</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"referenceNumber"</span>: <span class="token number">123456789</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"callbackUrl"</span>: <span class="token string">&quot;</span><a href="http://example.com">http://example.com</a><span class="token string">&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-jUkaYT joSISv"> <!-- -->Response samples<!-- --> </h3><div class="sc-bCjwNj cnTfwV" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-error react-tabs__tab--selected" role="tab" id="tab:R9pcq:0" aria-selected="true" aria-disabled="false" aria-controls="panel:R9pcq:0" tabindex="0" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel:R9pcq:0" aria-labelledby="tab:R9pcq:0"><div><div class="sc-bxmmIP OIIYS"><span class="sc-fEOKFM dpRqHD">Content type</span><div class="sc-beKSRx hmEMDU">application/json</div></div><div class="sc-loYsQo exYKuj"><div class="sc-eOrxMY jmgBLa"><div class="sc-lertIE hzLBDF"><button><div class="sc-fCSSOr kPewJt">Copy</div></button></div><div class="sc-dJkDXt eOvdyU sc-gtlvkJ fAqzdc"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"message"</span>: <span class="token string">&quot;error message&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-jUkaYT joSISv"> Callback payload samples </h3><div class="sc-dqSOdN ceshRe"><div class="sc-bxmmIP OIIYS"><span class="sc-fEOKFM dpRqHD">Callback</span><div class="sc-beKSRx hmEMDU">POST: Callback for transaction completion notification</div></div><div class="sc-btRGtK bfsIys"><div class="sc-bxmmIP OIIYS"><span class="sc-fEOKFM dpRqHD">Content type</span><div class="sc-beKSRx hmEMDU">application/json</div></div><div class="sc-loYsQo exYKuj"><div class="sc-eOrxMY jmgBLa"><div class="sc-lertIE hzLBDF"><button><div class="sc-fCSSOr kPewJt">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div class="sc-dJkDXt eOvdyU sc-gtlvkJ fAqzdc"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"transactionId"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"status"</span>: <span class="token string">&quot;Success&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"authorizedAmount"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"value"</span>: <span class="token number">10.22</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"currency"</span>: <span class="token string">&quot;EUR&quot;</span></div></li></ul><span class="token punctuation">}</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"tenderName"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"posEntry"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"PANTruncated"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"receiptMerchant"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"receiptCardHolder"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"receiptCashRegister"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"referenceNumber"</span>: <span class="token string">&quot;string&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div><div id="tag/transaction/paths/~1transaction~1abort/post" data-section-id="tag/transaction/paths/~1transaction~1abort/post" class="sc-dycHyt gWRVHL"><div class="sc-kfeOyU eTCvZl"><div class="sc-fLDLck cCTQFs"><h2 class="sc-jBIHhB ONRDj"><a class="sc-jHswkR ccWJGj" href="#tag/transaction/paths/~1transaction~1abort/post" aria-label="tag/transaction/paths/~1transaction~1abort/post"></a>Aborts a transaction<!-- --> </h2><h5 class="sc-deSjom dunSEZ">Request Body schema: <span class="sc-dslWvo lcGauM">application/json</span></h5><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs"></div><table class="sc-dVupuq fEMWVS"><tbody><tr class="last "><td kind="field" title="transactionId" class="sc-kXOizl sc-dPKAra eztgDe kNyONh"><span class="sc-gjXmFk iXqMpQ"></span><span class="property-name">transactionId</span><div class="sc-sediK sc-incsXD jBpAbV kpBMZY">required</div></td><td class="sc-fuExOL eidGeB"><div><div><span class="sc-sediK sc-cAQujh jBpAbV hELCbj"></span><span class="sc-sediK sc-haUlXw jBpAbV bCDwpq">string</span></div> <div><div html="&lt;p&gt;Unique identifier for the transaction (from the request)&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"><p>Unique identifier for the transaction (from the request)</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-dxpuJR kogFEO">Responses</h3><div><button class="sc-fIeReU giHjSG" disabled=""><strong class="sc-bAomZO dqKUKh">200<!-- --> </strong><div html="&lt;p&gt;Transaction aborted successfully&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs sc-dXYVqG iWCNbi"><p>Transaction aborted successfully</p>
+</div></button></div><div><button class="sc-fIeReU jUGGWm"><svg class="sc-cSaEAk kpohcO" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-bAomZO dqKUKh">500<!-- --> </strong><div html="&lt;p&gt;Failed to abort the transaction&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs sc-dXYVqG iWCNbi"><p>Failed to abort the transaction</p>
+</div></button></div></div></div><div class="sc-jbAkgO sc-gNZgCX lcisZz libpUV"><div class="sc-cOTGOU iQlcjo"><button class="sc-ijEwUV heSNra"><span type="post" class="sc-iNzRy ddMszN http-verb post">post</span><span class="sc-dNMyuw hGqECm">/transaction/abort</span><svg class="sc-cSaEAk jsDnaG" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-eEFyrX dfQykF"><div class="sc-dHpROs cIiuCa"><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div><div tabindex="0" role="button"><div class="sc-idhQoR bWJrMC"><span>https://127.0.0.1:[port]</span>/transaction/abort</div></div></div></div></div><div><h3 class="sc-jUkaYT joSISv"> <!-- -->Request samples<!-- --> </h3><div class="sc-bCjwNj cnTfwV" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab:R99kq:0" aria-selected="true" aria-disabled="false" aria-controls="panel:R99kq:0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel:R99kq:0" aria-labelledby="tab:R99kq:0"><div><div class="sc-bxmmIP OIIYS"><span class="sc-fEOKFM dpRqHD">Content type</span><div class="sc-beKSRx hmEMDU">application/json</div></div><div class="sc-loYsQo exYKuj"><div class="sc-eOrxMY jmgBLa"><div class="sc-lertIE hzLBDF"><button><div class="sc-fCSSOr kPewJt">Copy</div></button></div><div class="sc-dJkDXt eOvdyU sc-gtlvkJ fAqzdc"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"transactionId"</span>: <span class="token string">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-jUkaYT joSISv"> <!-- -->Response samples<!-- --> </h3><div class="sc-bCjwNj cnTfwV" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-error react-tabs__tab--selected" role="tab" id="tab:R9pkq:0" aria-selected="true" aria-disabled="false" aria-controls="panel:R9pkq:0" tabindex="0" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel:R9pkq:0" aria-labelledby="tab:R9pkq:0"><div><div class="sc-bxmmIP OIIYS"><span class="sc-fEOKFM dpRqHD">Content type</span><div class="sc-beKSRx hmEMDU">application/json</div></div><div class="sc-loYsQo exYKuj"><div class="sc-eOrxMY jmgBLa"><div class="sc-lertIE hzLBDF"><button><div class="sc-fCSSOr kPewJt">Copy</div></button></div><div class="sc-dJkDXt eOvdyU sc-gtlvkJ fAqzdc"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"message"</span>: <span class="token string">&quot;error message&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div><div id="tag/status" data-section-id="tag/status" class="sc-dycHyt ijZyAc"><div class="sc-kfeOyU eTCvZl"><div class="sc-fLDLck cCTQFs"><h2 class="sc-jBIHhB ONRDj"><a class="sc-jHswkR ccWJGj" href="#tag/status" aria-label="tag/status"></a>status</h2></div></div><div class="sc-fLDLck Petks"><div class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs redoc-markdown " html="&lt;p&gt;Used to get terminal status&lt;/p&gt;
+"><p>Used to get terminal status</p>
+</div></div></div><div id="tag/status/paths/~1status/get" data-section-id="tag/status/paths/~1status/get" class="sc-dycHyt gWRVHL"><div class="sc-kfeOyU eTCvZl"><div class="sc-fLDLck cCTQFs"><h2 class="sc-jBIHhB ONRDj"><a class="sc-jHswkR ccWJGj" href="#tag/status/paths/~1status/get" aria-label="tag/status/paths/~1status/get"></a>Get terminal status<!-- --> </h2><div><h3 class="sc-dxpuJR kogFEO">Responses</h3><div><button class="sc-fIeReU YShps"><svg class="sc-cSaEAk gGbHCS" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-bAomZO dqKUKh">200<!-- --> </strong><div html="&lt;p&gt;Status retrieved successfully&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs sc-dXYVqG iWCNbi"><p>Status retrieved successfully</p>
+</div></button></div><div><button class="sc-fIeReU jUGGWm"><svg class="sc-cSaEAk kpohcO" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-bAomZO dqKUKh">500<!-- --> </strong><div html="&lt;p&gt;Failed to get status&lt;/p&gt;
+" class="sc-dJkDXt sc-eXfTSZ eOvdyU iFgJCs sc-dXYVqG iWCNbi"><p>Failed to get status</p>
+</div></button></div></div></div><div class="sc-jbAkgO sc-gNZgCX lcisZz libpUV"><div class="sc-cOTGOU iQlcjo"><button class="sc-ijEwUV heSNra"><span type="get" class="sc-iNzRy cVuTcb http-verb get">get</span><span class="sc-dNMyuw hGqECm">/status</span><svg class="sc-cSaEAk jsDnaG" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-eEFyrX dfQykF"><div class="sc-dHpROs cIiuCa"><div html="" class="sc-dJkDXt sc-eXfTSZ eOvdyU fHLtmm"></div><div tabindex="0" role="button"><div class="sc-idhQoR bWJrMC"><span>https://127.0.0.1:[port]</span>/status</div></div></div></div></div><div><h3 class="sc-jUkaYT joSISv"> <!-- -->Response samples<!-- --> </h3><div class="sc-bCjwNj cnTfwV" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab:R4sta:0" aria-selected="true" aria-disabled="false" aria-controls="panel:R4sta:0" tabindex="0" data-rttab="true">200</li><li class="tab-error" role="tab" id="tab:R4sta:1" aria-selected="false" aria-disabled="false" aria-controls="panel:R4sta:1" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel:R4sta:0" aria-labelledby="tab:R4sta:0"><div><div class="sc-bxmmIP OIIYS"><span class="sc-fEOKFM dpRqHD">Content type</span><div class="sc-beKSRx hmEMDU">application/json</div></div><div class="sc-loYsQo exYKuj"><div class="sc-eOrxMY jmgBLa"><div class="sc-lertIE hzLBDF"><button><div class="sc-fCSSOr kPewJt">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div class="sc-dJkDXt eOvdyU sc-gtlvkJ fAqzdc"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"terminalStatus"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"displayContent"</span>: <span class="token string">&quot;Present Card&quot;</span></div></li></ul><span class="token punctuation">}</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"ECRStatus"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"displayContent"</span>: <span class="token string">&quot;Follow instructions on the terminal&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel:R4sta:1" aria-labelledby="tab:R4sta:1"></div></div></div></div></div></div></div><div class="sc-dYSzwF ewMbgE"></div></div></div>
+      <script>
+      const __redoc_state = {"menu":{"activeItemIdx":-1},"spec":{"data":{"openapi":"3.0.3","info":{"title":"BullochTech API - PaytestAPI","contact":{"name":"Support","email":"support@paytestlab.com"},"version":"1.0.1"},"servers":[{"url":"https://127.0.0.1:[port]"}],"tags":[{"name":"transaction","description":"Used for controlling transactions"},{"name":"status","description":"Used to get terminal status"}],"paths":{"/transaction/start":{"post":{"tags":["transaction"],"summary":"Starts a transaction","requestBody":{"description":"Starts a new transaction and optionally provides a callback URL for transaction completion notification","required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/StartTransactionRequest"}}}},"responses":{"200":{"description":"Transaction started successfully"},"400":{"description":"Invalid input"},"500":{"description":"Failed to start the transaction","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorResponse"}}}}},"callbacks":{"transactionCompleted":{"{$request.body#/callbackUrl}":{"post":{"summary":"Callback for transaction completion notification","requestBody":{"description":"Notification payload containing details of the completed transaction","required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/TransactionCompletionNotification"}}}},"responses":{"200":{"description":"Notification received successfully"}}}}}}}},"/transaction/abort":{"post":{"tags":["transaction"],"summary":"Aborts a transaction","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AbortTransactionRequest"}}}},"responses":{"200":{"description":"Transaction aborted successfully"},"500":{"description":"Failed to abort the transaction","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorResponse"}}}}}}},"/status":{"get":{"tags":["status"],"summary":"Get terminal status","responses":{"200":{"description":"Status retrieved successfully","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Status"}}}},"500":{"description":"Failed to get status","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorResponse"}}}}}}}},"components":{"schemas":{"StartTransactionRequest":{"type":"object","properties":{"transactionId":{"type":"string","description":"Unique identifier for the transaction provided by the client","example":"123e4567-e89b-12d3-a456-426614174000"},"transactionType":{"type":"string","enum":["Sale","Purchase","Cashback","Refund","PreAuthorization","OnlineAdvice","PurchaseWithCashback"],"example":"Purchase"},"amount":{"$ref":"#/components/schemas/Amount"},"amountTip":{"$ref":"#/components/schemas/Amount"},"amountOther":{"$ref":"#/components/schemas/Amount"},"referenceNumber":{"type":"string","example":123456789},"callbackUrl":{"type":"string","format":"uri","description":"URL to notify when the transaction is complete"}}},"TransactionCompletionNotification":{"type":"object","required":["transactionId","status"],"properties":{"transactionId":{"type":"string","description":"Unique identifier for the transaction (from the request)"},"status":{"type":"string","description":"Final status of the transaction","enum":["Success","Failed"]},"authorizedAmount":{"$ref":"#/components/schemas/Amount"},"tenderName":{"type":"string"},"posEntry":{"type":"string"},"PANTruncated":{"type":"string"},"receiptMerchant":{"type":"string"},"receiptCardHolder":{"type":"string"},"receiptCashRegister":{"type":"string"},"referenceNumber":{"type":"string"}}},"Amount":{"type":"object","properties":{"value":{"type":"number","multipleOf":0.01,"example":10.22},"currency":{"type":"string","example":"EUR"}}},"AbortTransactionRequest":{"required":["transactionId"],"properties":{"transactionId":{"type":"string","description":"Unique identifier for the transaction (from the request)","example":"123e4567-e89b-12d3-a456-426614174000"}}},"ErrorResponse":{"required":["message"],"type":"object","properties":{"message":{"type":"string","example":"error message"}}},"Status":{"required":["terminalStatus"],"type":"object","properties":{"terminalStatus":{"$ref":"#/components/schemas/TerminalStatus"},"ECRStatus":{"$ref":"#/components/schemas/ECRStatus"}}},"TerminalStatus":{"type":"object","properties":{"displayContent":{"type":"string","example":"Present Card"}}},"ECRStatus":{"type":"object","properties":{"displayContent":{"type":"string","example":"Follow instructions on the terminal"}}}}}}},"searchIndex":{"store":["tag/transaction","tag/transaction/paths/~1transaction~1start/post","tag/transaction/paths/~1transaction~1abort/post","tag/status","tag/status/paths/~1status/get"],"index":{"version":"2.3.9","fields":["title","description"],"fieldVectors":[["title/0",[0,0.34]],["description/0",[0,0.226,1,0.688,2,1.089]],["title/1",[0,0.261,3,1.258]],["description/1",[4,1.694]],["title/2",[0,0.261,5,1.258]],["description/2",[6,1.694]],["title/3",[7,0.34]],["description/3",[1,0.688,7,0.226,8,0.688]],["title/4",[7,0.261,8,0.794]],["description/4",[7,0.352]]],"invertedIndex":[["abort",{"_index":5,"title":{"2":{}},"description":{}}],["control",{"_index":2,"title":{},"description":{"0":{}}}],["start",{"_index":3,"title":{"1":{}},"description":{}}],["statu",{"_index":7,"title":{"3":{},"4":{}},"description":{"3":{},"4":{}}}],["termin",{"_index":8,"title":{"4":{}},"description":{"3":{}}}],["transact",{"_index":0,"title":{"0":{},"1":{},"2":{}},"description":{"0":{}}}],["transaction/abort",{"_index":6,"title":{},"description":{"2":{}}}],["transaction/start",{"_index":4,"title":{},"description":{"1":{}}}],["us",{"_index":1,"title":{},"description":{"0":{},"3":{}}}]],"pipeline":[]}},"options":{}};
+
+      var container = document.getElementById('redoc');
+      Redoc.hydrate(__redoc_state, container);
+
+      </script>
+</body>
+
+</html>
